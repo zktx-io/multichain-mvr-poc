@@ -1,0 +1,123 @@
+name: Build, Deploy, and Generate Provenance for Multichain Verifiable Registry (MVR)
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: write
+  actions: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      base64_hashes: ${{ steps.encode.outputs.base64_hashes }}
+    env:
+      PRIVATE_KEY_SUI: ${{ secrets.PRIVATE_KEY_SUI }}
+      PRIVATE_KEY_ETH: ${{ secrets.PRIVATE_KEY_ETH }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npx hardhat compile
+
+      - name: Deploy contract
+        id: deploy
+        run: |
+          node scripts/deploy.js
+
+      - name: Upload Bytecode Dump
+        uses: actions/upload-artifact@v4
+        with:
+          name: mvr.proof.json
+          path: ./mvr.proof.json
+          if-no-files-found: error
+
+      - id: encode
+        run: |
+          HASHES=""
+          for FILE in mvr.proof.json; do
+            if [ ! -f "$FILE" ]; then
+              echo "::error::❌ $FILE not found"
+              exit 1
+            fi
+            FILE_HASH=$(sha256sum "$FILE" | cut -d ' ' -f 1)
+            HASHES+="${FILE_HASH}  ${FILE}"$'\n'
+          done
+
+          echo "base64_hashes=$(echo -n "$HASHES" | base64 -w0)" >> "$GITHUB_OUTPUT"
+
+  provenance:
+    needs: deploy
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
+    with:
+      base64-subjects: ${{ needs.deploy.outputs.base64_hashes }}
+      upload-assets: false
+      provenance-name: 'mvr.intoto.jsonl'
+
+  verify:
+    needs: [deploy, provenance]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download provenance file
+        uses: actions/download-artifact@v4
+        with:
+          name: mvr.intoto.jsonl
+          path: .
+
+      - name: Download mvr.proof.json artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: mvr.proof.json
+          path: .
+
+      - name: Install slsa-verifier
+        run: |
+          curl -sSfL https://github.com/slsa-framework/slsa-verifier/releases/latest/download/slsa-verifier-linux-amd64 -o slsa-verifier
+          chmod +x slsa-verifier
+          sudo mv slsa-verifier /usr/local/bin/
+
+      - name: Verify all provenance files
+        run: |
+          for FILE in mvr.proof.json; do
+            echo "🔍 Verifying $FILE..."
+            slsa-verifier verify-artifact "$FILE" \
+              --provenance-path mvr.intoto.jsonl \
+              --source-uri "github.com/${{ github.repository }}" \
+              || {
+                echo "::error::❌ Verification failed for $FILE"
+                exit 1
+              }
+          done
+
+  mvr:
+    needs: [deploy, provenance, verify]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download provenance file
+        uses: actions/download-artifact@v4
+        with:
+          name: mvr.intoto.jsonl
+          path: .
+
+      - name: Download mvr.proof.json artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: mvr.proof.json
+          path: .
+
+      - name: Resgister MVR
+        id: register
+        run: |
+          node scripts/mvr.js

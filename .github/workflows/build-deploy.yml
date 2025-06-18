@@ -3,6 +3,8 @@ name: Build, Deploy, and Generate Provenance for Multichain Verifiable Registry 
 on:
   push:
     branches: [main]
+    paths:
+      - 'scripts/*.js'
 
 permissions:
   id-token: write

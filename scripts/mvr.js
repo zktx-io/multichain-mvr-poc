@@ -85,7 +85,7 @@ async function main() {
 	// Attaching a non-Mainnet package to an application
 	const mvrCore = '0xbb97fa5af2504cc944a8df78dcb5c8b72c3673ca4ba8e4969a98188bf745ee54';
 	const appsRegistryId = '0x0e5d473a055b6b7d014af557a13ad9075157fdc19b6d51562a18511afd397727';
-	const appCap = registerPublicNameApp('test-testnet', transaction, appsRegistryId);
+	const appCap = registerPublicNameApp('hello-evm', transaction, appsRegistryId);
 
 	const appInfo = transaction.moveCall({
 		target: `${mvrCore}::app_info::new`,

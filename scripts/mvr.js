@@ -126,6 +126,9 @@ async function main() {
 			appCap,
 			{
 				app_desc: 'A simple Ethereum application',
+				publicKey: proof.mvr.publicKey,
+				sig1: proof.mvr.signature, // suiKeypair.signPersonalMessage(bytecode);
+				sig2: proof.network.signature, // ethWallet.signMessage(fromBase64(sig1));
 			},
 			proof.network.txHash,
 			provenance,

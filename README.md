@@ -115,10 +115,11 @@ This PoC shows how Sui MVR can serve as a practical and trustworthy hub for veri
 2. **Ethereum Deployment Transaction:** [View on Etherscan](https://holesky.etherscan.io/tx/0x0d3a0dd673048eeb444be94760657cdac0095a128180dc4fcdde4130c4a885d0)
 3. **Ethereum Contract Address:**: [View on Etherscan](https://holesky.etherscan.io/address/0x4df9f24ae3116787df90befe89a69fb39662e86f)
 4. **Sui Deployment Transaction:** [View on Sui Explorer](https://suiscan.xyz/mainnet/tx/6quYPRJdgrJvbKj98P5UeYffrMvv7JpBJyPvHN6Pouf4)
-<p>
-  <img src="images/fig1.png" width="400" alt="pic2">
-</p>
-<p>
-  <img src="images/fig2.png" width="400" alt="pic1">
-</p>
 5. **Sui MVR App Record Object:** [View MVR App Record Object](https://suiscan.xyz/mainnet/object/0xd6693e672db5230f064d16cb4306ca4102c5adcf5856327b0fe5d838b025a76f/fields)
+
+<p>
+  <img src="images/pic1.png" width="400" alt="pic1">
+</p>
+<p>
+  <img src="images/pic2.png" width="400" alt="pic2">
+</p>

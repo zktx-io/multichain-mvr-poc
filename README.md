@@ -117,9 +117,5 @@ This PoC shows how Sui MVR can serve as a practical and trustworthy hub for veri
 4. **Sui Deployment Transaction:** [View on Sui Explorer](https://suiscan.xyz/mainnet/tx/6quYPRJdgrJvbKj98P5UeYffrMvv7JpBJyPvHN6Pouf4)
 5. **Sui MVR App Record Object:** [View MVR App Record Object](https://suiscan.xyz/mainnet/object/0xd6693e672db5230f064d16cb4306ca4102c5adcf5856327b0fe5d838b025a76f/fields)
 
-<p>
-  <img src="images/pic1.png" width="400" alt="pic1">
-</p>
-<p>
-  <img src="images/pic2.png" width="400" alt="pic2">
-</p>
+![pic1](images/pic1.png)
+![pic2](images/pic2.png)

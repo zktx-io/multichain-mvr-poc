@@ -104,6 +104,8 @@ jobs:
   mvr:
     needs: [deploy, provenance, verify]
     runs-on: ubuntu-latest
+    env:
+      PRIVATE_KEY_SUI: ${{ secrets.PRIVATE_KEY_SUI }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

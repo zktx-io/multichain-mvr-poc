@@ -125,7 +125,7 @@ This PoC shows how Sui MVR can serve as a practical and trustworthy hub for veri
 ### 4. TODO (Implement a verification script)
   
   1. Fetches the registered MVR object on Sui
-  1. Reconstructs the original mvr.proof.json
+  1. Reconstructs the original mvr.proof.json  *(Note: some fields are currently omitted during registration—this will be addressed in a future update.)*  
   1. Compares it with the deployed Ethereum contract to ensure consistency
 
   These steps are expected to help confirm that the on-chain MVR record aligns with the deployed Ethereum contract, strengthening verifiability.

@@ -104,6 +104,7 @@ In addition to secrets, GitHub Actions must be granted appropriate permissions (
   1. Integration with Real-world IoT Devices
 
       1. To support trusted interaction from physical devices, this could involve either extending MVR's metadata structures or creating a new object type designed specifically for device-level provenance.
+      1. Once both the device and the smart contract are registered in MVR, their interaction could be mutually verifiable — ensuring that only trusted hardware is allowed to trigger trusted on-chain logic.
 
 ---
 

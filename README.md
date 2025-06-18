@@ -98,7 +98,8 @@ In addition to secrets, GitHub Actions must be granted appropriate permissions (
   1. Interaction with Multi-chain Smart Contracts
 
       1. Depending on the use case, this could involve deploying a Sui smart contract to interact with other blockchains and either reusing the existing `PackageInfo` structure or introducing a dedicated object for proxy-based interaction provenance.
-      1. This would enable Sui to serve as a secure interaction hub between different blockchains.
+      1. With MVR serving as the common provenance layer, such interactions could be mutually verifiable — enabling cross-chain smart contracts to trust each other’s origin and integrity.
+      1. With MVR serving as the common provenance layer, such interactions could be mutually verifiable — enabling cross-chain smart contracts to trust each other’s origin and integrity.
 
   1. Integration with Real-world IoT Devices
 

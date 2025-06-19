@@ -1,6 +1,6 @@
 ## 🧚 Multichain Verifiable Registry (MVR) – PoC
 
-This repository demonstrates a proof-of-concept for extending [Sui's MVR (Move Verifiable Registry)](https://github.com/MystenLabs/mvr) to support **Ethereum smart contracts**.
+This repository demonstrates a proof-of-concept for extending [Sui's MVR (Move Registry)](https://github.com/MystenLabs/mvr) to support **Ethereum smart contracts**.
 
 ### ✅ Goal
 
@@ -36,7 +36,6 @@ This project uses **GitHub Actions** to:
 * `.github/workflows/build-deploy.yml` – GitHub Actions automation
 * `mvr.proof.json` – Contains signatures and deployment metadata
 * `mvr.intoto.jsonl` – Final verifiable provenance document
-* `scripts/register.js` – Registers the deployed contract and provenance to MVR
 
 ---
 
@@ -121,6 +120,7 @@ This PoC shows how Sui MVR can serve as a practical and trustworthy hub for veri
   1. **Sui Deployment Transaction:** [View on Sui Explorer](https://suiscan.xyz/mainnet/tx/6quYPRJdgrJvbKj98P5UeYffrMvv7JpBJyPvHN6Pouf4)
   1. **Sui MVR App Record Object:** [View MVR App Record Object](https://suiscan.xyz/mainnet/object/0xd6693e672db5230f064d16cb4306ca4102c5adcf5856327b0fe5d838b025a76f/fields)
 
+![pic0](images/pic0.png)
 ![pic1](images/pic1.png)
 ![pic2](images/pic2.png)
 
